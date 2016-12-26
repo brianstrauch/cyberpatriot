@@ -5,8 +5,8 @@
 
 if [[ $EUID -ne 0 ]]
 then
-    echo "You must be root to run this script."
-    exit 1
+  echo "You must be root to run this script."
+  exit 1
 fi
 
 # Firewall
@@ -40,12 +40,12 @@ read option
 
 if [[ $option =~ ^[Yy]$ ]]
 then
-	sudo apt-get -y install mysql-server
-	# Disable remote access
-	sudo sed -i '/bind-address/ c\bind-address = 127.0.0.1' /etc/mysql/my.cnf
-	sudo service mysql restart
+  sudo apt-get -y install mysql-server
+  # Disable remote access
+  sudo sed -i '/bind-address/ c\bind-address = 127.0.0.1' /etc/mysql/my.cnf
+  sudo service mysql restart
 else
-	sudo apt-get -y purge mysql*
+  sudo apt-get -y purge mysql*
 fi
 
 # OpenSSH Server
@@ -54,12 +54,12 @@ read option
 
 if [[ $option =~ ^[Yy]$ ]]
 then
-	sudo apt-get -y install openssh-server
-	# Disable root login
-	sudo sed -i '/^PermitRootLogin/ c\PermitRootLogin no' /etc/ssh/sshd_config
-	sudo service ssh restart
+  sudo apt-get -y install openssh-server
+  # Disable root login
+  sudo sed -i '/^PermitRootLogin/ c\PermitRootLogin no' /etc/ssh/sshd_config
+  sudo service ssh restart
 else
-	sudo apt-get -y purge openssh-server*
+  sudo apt-get -y purge openssh-server*
 fi
 
 # VSFTPD
@@ -68,15 +68,15 @@ read option
 
 if [[ $option =~ ^[Yy]$ ]]
 then
-	sudo apt-get -y install vsftpd
-	# Disable anonymous uploads
-	sudo sed -i '/^anon_upload_enable/ c\anon_upload_enable no' /etc/vsftpd.conf # outdated?
+  sudo apt-get -y install vsftpd
+  # Disable anonymous uploads
+  sudo sed -i '/^anon_upload_enable/ c\anon_upload_enable no' /etc/vsftpd.conf # outdated?
   sudo sed -i '/^anonymous_enable/ c\anonymous_enable=NO' /etc/vsftpd.conf
   # FTP user directories use chroot
   sudo sed -i '/^chroot_local_user/ c\chroot_local_user=YES' /etc/vsftpd.conf
   sudo service vsftpd restart
 else
-	sudo apt-get -y purge vsftpd*
+  sudo apt-get -y purge vsftpd*
 fi
 
 # Malware
@@ -85,5 +85,5 @@ sudo apt-get -y purge hydra* john* nikto*
 # Media Files
 for suffix in mp3 txt wav wma aac mp4 mov avi gif jpg png bmp img exe msi bat sh
 do
-	sudo find /home -name *.$suffix
+  sudo find /home -name *.$suffix
 done
