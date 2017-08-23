@@ -1,3 +1,3 @@
 # cyberpatriot
 
-sudo bash security.sh
+ubuntu@linux:~$ sudo bash security.sh
