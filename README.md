@@ -1,3 +1,1 @@
 # cyberpatriot
-
-Ubuntu Security Script
